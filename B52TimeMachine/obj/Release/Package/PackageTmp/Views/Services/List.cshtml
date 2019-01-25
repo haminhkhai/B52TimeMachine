@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Services";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Services</h2>
+<a class="btn btn-secondary" href="/services/new/">New Service</a>
+<div class="table-wrapper">
+    <table id="js-table-services" style="width:100%" class="display compact">
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Services</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+@section scripts{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $("#js-table-services").DataTable({
+                ajax: {
+                    url: "/api/services",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "order"
+                    },
+                    {
+                        data: "name",
+                        render: function (data, type, services) {
+                            return "<a href='/services/edit/" + services.serviceId + "'>" + data + "</a>";
+                        }
+                    },
+                    {
+                        data: "price"
+                    },
+                    {
+                        data: "isCig",
+                        render: function (data) {
+                            if (data) {
+                                return "Cigarette";
+                            }
+                            else {
+                                return "Drink";
+                            }
+                        }
+                    },
+                    {
+                        data: "isVisible",
+                        render: function (data) {
+                            if (data) {
+                                return "Visible";
+                            }
+                            else {
+                                return "Invisible";
+                            }
+                        }
+                    }
+                ],
+                searching: false,
+                sorting: false,
+                bInfo: false,
+                paging: false
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Warehouse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Warehouse</h2>
+<a href="/warehouse/restock" class="btn btn-secondary">Restock</a>
+<a href="/warehouse/checkquantity" class="btn btn-secondary">Warehouse check</a>
+<div class="table-wrapper">
+    <table id="js-table-warehouse-services" style="width:100%" class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Services</th>
+                <th>Service Type</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+@section scripts
+{
+    
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                url: "/Api/Warehouse",
+                method: "GET"
+            })
+            .done(function(response) {
+                for (var i = 0; i < response.length; i++) {
+                    var serviceType = response[i].service.isCig ? "Cigarette" : "Drink";
+
+                    $("#js-table-warehouse-services").children("tbody").append(
+                        "<tr>" +
+                            "<td>" + response[i].service.name + "</td>" + 
+                            "<td>" + serviceType + "</td>" + 
+                            "<td>" + response[i].quantity + "</td>" +
+                        "</tr>"
+                    );
+                }
+            })
+            .fail(function (response) {
+                toastr.error(response.responseJSON.message)
+            });
+        });
+
+    </script>
+}

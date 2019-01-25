@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body id="bs-overwrite">
+    @*<div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div style="text-align:center;" class="col-md-8">
+                        <div class="logo">
+                            <h1><a href="~/Home/Index">Time machine</a></h1>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/home/">Time machine</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="~/home">Time</a>
+                    <a class="nav-item nav-link" href="~/statistics">Statistics</a>
+                    <a class="nav-item nav-link" href="~/services">Services</a>
+                    <a class="nav-item nav-link" href="~/warehouse">Warehouse</a>
+                    <a class="nav-item nav-link" href="~/ps">Ps list</a>
+                </div>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+
+    </nav>
+
+    <div class="container body-content">
+        @*side layout*@
+        <div class="row">
+            @*<div style="margin:0 auto" class="col-8 col-sm-4 col-md-3 col-lg-2">
+            <div class="sidebar content-box" style="display: block;">
+                <ul class="nav">
+
+                    <li><a href="~/home/"><i class="fa fa-clock"></i>Time</a></li>
+                    <li><a href="~/statistics/"><i class="fa fa-chart-bar"></i>Statistics</a></li>
+                    <li><a href="~/services/"><i class="fa fa-cocktail"></i>Services</a></li>
+                    <li><a href="~/warehouse"><i class="fa fa-warehouse"></i>Warehouse</a></li>
+                    <li><a href="~/ps"><i class="fa fa-warehouse"></i>Ps list</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-12 col-sm-8 col-md-9 col-lg-10">
+        </div>*@
+            <div class="col-12">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

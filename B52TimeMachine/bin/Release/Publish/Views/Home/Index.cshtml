@@ -1,0 +1,170 @@
+﻿
+@model B52TimeMachine.ViewModels.IndexViewModel
+@{
+    ViewBag.Title = "B52 time machine";
+}
+
+<div id="psPanel" class="row">
+    @for (int i = 0; i < Model.PsRentalDtos.Count(); i++)
+    {
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            @{
+        var className = "";
+        if (!Model.PsRentalDtos[i].IsAvailable)
+        {
+            className = "ps-rented";
+        }
+            }
+            <div class="ps-wrapper">
+                <div tabindex="0" data-toggle="popover" data-ps-id="@Model.PsRentalDtos[i].PsId" class="ps-box @className" data-rental-id="@Model.PsRentalDtos[i].RentalId">
+                    <img class="ps-img @className" src="/Content/Images/ps4.png" />
+                    <div class="ps-title">@Model.PsRentalDtos[i].Name</div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+@section scripts{
+    @*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">*@
+    <link rel="stylesheet" href="/Content/bootstrap-multiselect.css" />
+    <script src="/Scripts/jquery.number.min.js"></script>
+    <script src="/Scripts/bootstrap-multiselect.js"></script>
+    <script src="/Scripts/Rental/EditRentalServices.js"></script>
+    <script src="/Scripts/Rental/NewRentalServices.js"></script>
+    <script src="/Scripts/Rental/SplitTime.js"></script>
+    @*<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
+}
+@*new rental modal*@
+<div class="modal fade bd-example-modal-sm" id="new-rental-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newRentalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">From:</label>
+                    <input type="text" readonly class="form-control" id="recipient-name" value="@DateTime.Now.ToString("HH:mm:ss")">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSaveNewRental" class="btn btn-secondary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*checkout modal*@
+
+<div class="modal fade" id="checkout-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="js-text-checkout">Checkout</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span id="js-text-checkin-time" class="checkout-time"></span>
+                <span id="js-text-checkout-time" class="checkout-time"></span>
+                <a data-toggle="collapse" href="#collapse-split-time" class="btn-split-time"  aria-expanded="false" aria-controls="collapse-split-time">Detail</a>
+                <div class="collapse collapse-split-time" id="collapse-split-time">
+                    <div class="card card-body">
+                        <div class="split-time-bar">
+                            @*<div class="split-time-item" style="width:30%; background-color:aquamarine">
+                                <span>1:20 24k</span>
+                            </div>
+                            <div class="split-time-item" style="width:70%; background-color:rosybrown">
+
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+                <table id="js-table-service-rental" style="width:100%;margin:20px auto" class="table table-sm table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Services</th>
+                            <th class="sum-quantity">Qty</th>
+                            <th class="sum-price">Sum</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+
+                <h1 id="js-text-total"></h1>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" id="btn-save" class="btn btn-secondary">Save</button>
+                <button type="submit" id="btn-checkout" class="btn btn-secondary">Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*add service modal*@
+<div class="modal fade bd-example-modal-sm" id="service-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="serviceTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <select id="serviceSelect" name="service" multiple>
+                    @for (int i = 0; i < Model.Services.Count(); i++)
+                    {
+                        <option value="@Model.Services[i].ServiceId">@Model.Services[i].Name</option>
+                    }
+                </select>
+                <div class="service-form-group">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSaveService" class="btn btn-secondary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*switch ps modal*@
+<div class="modal fade bd-example-modal-sm" id="switch-ps-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title-switch-ps-modal"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <select id="select-switch-ps" name="select-switch-ps" class="custom-select">
+                    <option value="-1" selected>Select ps to switch</option>
+                    @for (int i = 0; i < Model.PsRentalDtos.Count(); i++)
+                    {
+                        <option value="@Model.PsRentalDtos[i].PsId">@Model.PsRentalDtos[i].Name</option>
+                    }
+                </select>
+                <div class="service-form-group">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btn-save-switch-ps" class="btn btn-secondary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

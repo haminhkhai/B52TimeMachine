@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "New";
+    var formMethod = "";
+}
+@model B52TimeMachine.Models.Service
+@if (Model.ServiceId == 0)
+{
+    formMethod = "POST";
+    <h2>New Service</h2>
+}
+else
+{
+    formMethod = "PUT";
+    <h2>Edit Service</h2>
+}
+
+<form id="serviceForm">
+    <div class="form-group">
+        <label for="order">Order</label>
+        <input name="order" id="order" class="form-control" value="@Model.Order" />
+    </div>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input name="name" id="name" class="form-control" value="@Model.Name" />
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input name="price" id="price" class="form-control" value="@Model.Price" />
+    </div>
+    <div class="form-group">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="isCig" id="isCig2" value="false" checked>
+            <label class="form-check-label" for="isCig2">Drink</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="isCig" id="isCig1" value="true" checked="@Model.IsCig">
+            <label class="form-check-label" for="isCig1">Cigarette</label>
+        </div>
+        
+    </div>
+    <div class="form-group">
+        <select id="status" name="status" class="form-control">
+            <option value="true" selected="@Model.IsVisible">Visible</option>
+            <option value="false" selected="@(!Model.IsVisible)">Invisible</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="hidden" id="serviceId" value="@Model.ServiceId" />
+        <button id="submitBtn" class="btn btn-secondary">Save</button>
+        <a class="btn btn-dark" href="/services/">Back</a>
+    </div>
+</form>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            var vm = {};
+
+            $("#submitBtn").click(function() {
+                vm.id = $("serviceId").val();
+                vm.order = $("#order").val();
+                vm.name = $("#name").val();
+                vm.price = $("#price").val();
+                vm.isCig = $("input[name='isCig']:checked").val();
+                vm.isVisible = $("#status").val();
+            });
+
+            var validator = $("#serviceForm").validate({
+                rules: {
+                    order: {
+                        required: true,
+                        number: true
+                    },
+                    name: {
+                        required: true
+                    },
+                    price: {
+                        required: true,
+                        number: true
+                    }
+                },
+                submitHandler: function () {
+                    $.ajax({
+                        url: "/api/services/" + "@Model.ServiceId/",
+                        method: "@formMethod",
+                        data: vm
+                    })
+                    .done(function () {
+                        toastr.success("Saved successfully");
+
+                        if (vm.id == 0) {
+                            $("#order").val('');
+                            $("#name").val('');
+                            $("#price").val('');
+                            $("input[name=gender][value=false]").checked = true;
+                            $("#status").val('true');
+                        }
+
+                        validator.resetForm();
+                    })
+                    .fail(function () {
+                        toastr.error("Something wrong, sorry for the inconvenient");
+                    });
+                }
+            });
+        });
+    </script>
+}

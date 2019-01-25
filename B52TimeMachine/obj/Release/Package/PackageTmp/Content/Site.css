@@ -1,0 +1,311 @@
+﻿
+
+
+body {
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+ /*Set width on the form input elements since they're 100% wide by default 
+input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/*.img-slide-pc {
+}*/
+
+#bs-overwrite-admin .btn-remove-img {
+    position: absolute;
+    margin: 10px 0 0 10px;
+    z-index: 2;
+}
+
+    #bs-overwrite-admin .btn-remove-img a {
+        color: white;
+        font-family: Lato;
+    }
+
+#bs-overwrite-admin .btn-edit-img {
+    position: absolute;
+    margin: 10px 0 0 65px;
+    z-index: 2;
+}
+
+    #bs-overwrite-admin .btn-edit-img a {
+        color: white;
+        font-family: Lato;
+    }
+
+.slide-img-wrapper {
+    margin: 15px auto 15px auto;
+    width: 80%;
+}
+
+/*album section*/
+
+.ps-wrapper {
+    width:150px;
+    margin: 0 auto;
+    padding: 10px 0 10px 0;
+    height: auto;
+}
+
+.ps-box {
+    margin: 0 auto;
+    width:150px;
+    height: auto;
+    background-color: #eaeaea;
+}
+
+    .ps-box img {
+        width: 150px;
+        height:150px;
+    }
+    .ps-box .ps-rented {
+        background-color: #bf15159c;
+    }
+    
+
+.ps-title {
+    display: inline-block;
+    width: 100%;
+    padding: 5px;
+    color: black;
+    font-family: Calibri;
+}
+
+.blog-thumb-img {
+    max-height: 100px;
+}
+
+/*login section*/
+
+.login-body {
+    background-attachment: fixed;
+    background-clip: border-box;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/Content/IMG_Background/bg1.gif);
+    /*background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Content/IMG_Background/bg1.gif) no-repeat;*/
+    background-size: cover;
+    background-origin: padding-box;
+    /*background-position-x:50%;
+    background-position-y:50%;*/
+    /*background-image: none;*/
+}
+
+@media(min-height: 400px) {
+    .login-box-wrapper {
+        width: 100%;
+        height: 400px;
+        margin: 60px auto 0 auto;
+        text-align: center;
+    }
+}
+
+@media(min-height: 737px) {
+    .login-box-wrapper {
+        width: 600px;
+        height: 400px;
+        margin: 13% auto 0 auto;
+        text-align: center;
+    }
+}
+
+.welcome-text-box {
+    margin: 0 0 20px 0;
+}
+
+    .welcome-text-box h3 {
+        margin: 0 0 20px 0;
+        font: normal 30px Lato;
+        color:#b85a06;
+    }
+
+/*@media(min-height:400px) {
+    .field-box {
+        width: 70%;
+    }
+}
+
+@media(min-height:737px) {
+    .field-box {
+        width: 40%;
+    }
+}*/
+
+.field-box {
+    margin: 40px auto 0 auto;
+    text-align: left;
+}
+
+.login-body .login-btn{
+    width:100%;
+    float:right;
+    color:white;
+    font: normal 16px Lato;
+    background-color:#b85a06;
+}
+
+#bs-overwrite-admin .cb-show-on-index{
+    /*padding-left:5px;*/
+    margin:5px;
+}
+
+#bs-overwrite-admin input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  margin:0px 6px 0 0;
+}
+
+.popover-body{
+    padding:0 10px;
+}
+
+.popover-body a{
+    cursor:pointer;
+    font: normal 16px Lato;
+    display:block;
+    padding:8px 0 8px 0;
+    color: #999;
+}
+
+    #bs-overwrite .popover-body a:hover {
+        color: #357c7d;
+        text-decoration:none;
+    }
+
+.checkout-time{
+    margin: 0 8px 0 0;
+    display:inline-block;
+    font: normal 15px Lato;
+}
+
+.btn-split-time {
+    /*margin: 0 5px 0 0;*/
+    font: normal 15px Lato;
+    display: inline-block;
+}
+
+.services-table{
+    margin-top:15px;
+}
+
+.table-wrapper{
+    margin:25px auto;
+}
+
+.field-validation-error, 
+label.error{
+    color:red;
+}
+
+.input-validation-error{
+    border:2px solid red;
+}
+
+.service-form-group{
+    margin: 15px 0;
+}
+
+.service-form-group .input-group{
+    margin: 10px 0; 
+}
+
+.js-service-edit{
+    margin: auto 5px;
+}
+
+.collapse-split-time {
+    margin-top: 10px;
+}
+
+.split-time-bar {
+    display: table;
+    height: 30px;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.split-time-item {
+    vertical-align: middle;
+    text-align: center;
+    height: 30px;
+    display: table-cell;
+    background-color: aquamarine;
+    border: 1px solid black;
+    padding: 3px;
+}
+
+.split-time-item span{
+    font: normal 13px lato;
+    
+}
+
+#date-picker-from:hover{
+    cursor:pointer
+}
+#date-picker-to:hover{
+    cursor: pointer
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 2) {
+    .mobile-hide{
+        display:none;
+    }
+    #js-table-statistics{
+        font:normal 13px Lato;
+    }
+    #js-table-statistics_wrapper{
+        margin:10px auto;
+    }
+}
+
+.btn-delete-restock{
+    margin-left:10px;
+}
+
+.btn-delete-check-quantity {
+    margin-left: 10px;
+}
+
+@media(max-width: 991px) {
+    .login-box-wrapper {
+        
+    }
+}
